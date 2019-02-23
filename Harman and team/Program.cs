@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,5 +78,68 @@ namespace Harman_and_team
 
 
         }
+        public void Run()
+        {
+            Alst = new Village("Alst", false);
+            Schvenig = new Village("Schvenig", false);
+            Wessig = new Village("Wessig", false);
+            // TO DO: Complete this section
+
+            Alst.VillageSetup(0, Schvenig, Wessig);
+            Schvenig.VillageSetup(14, Maeland, Helmholtz);
+            // TO DO: Complete this section
+
+
+        }
+
+        public void Announcement()
+        {
+            try
+            {
+                // Create an instance of StreamReader to read from a file.
+                // The using statement also closes the StreamReader.
+                using (StreamReader sr = new StreamReader("c:/area51/annoucement.txt"))
+                {
+                    string line;
+
+                    // Read and display lines from the file until 
+                    // the end of the file is reached. 
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
     }
+
+    class Village
+    {
+        // http://www.vikinganswerlady.com/measurement.shtml
+
+        public Village(string _villageName, bool _isAHere)
+        {
+            isAstrildgeHere = _isAHere;
+            VillageName = _villageName;
+        }
+        public void VillageSetup(int _prevVillageDist, Village _westVillage, Village _eastVillage)
+        {
+            east = _eastVillage;
+            west = _westVillage;
+            distanceFromPreviousVillage = _prevVillageDist;
+        }
+
+        public Village west;
+        public Village east;
+        public string VillageName;
+        public int distanceFromPreviousVillage;
+        public bool isAstrildgeHere;
+    }
+}
 
